@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Entity
 @Table(name = "airplane")
@@ -19,4 +22,12 @@ public class Airplane {
     private String model;
     @NonNull
     private int place;
+    @OneToMany
+    @JoinColumn(name = "airplane_id")
+    List<Passenger> passengers;
+
+    @Autowired
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
 }
